@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="grey">#808080</color>
+    <color name="darkGrey">#546E7A</color>
+    <color name="lightGrey">#9a9a9a</color>
+    <color name="sdkThemeColorPrimary">#283c93</color>
+    <color name="sdkThemeColorAccent">#f7fcfe</color>
+    <color name="accentDark">#eff9fd</color>
+    <color name="blueColorLight">#0c92be</color>
+    <color name="textColorBlue">#b3d8eb</color>
+    <color name="skyBlue">#09c2b7</color>
+    <color name="blueColorDark">#0987cc</color>
+    <color name="sdkThemeColorLight">#cee7f5</color>
+
+</resources>

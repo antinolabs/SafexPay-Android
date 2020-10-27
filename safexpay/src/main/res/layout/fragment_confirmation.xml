@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="@dimen/scale_5dp"
+    tools:context=".UI.Fragment.ConfirmationFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/close_cancellation_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                android:tint="@color/lightGrey" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/close_cancellation_dialog"
+                android:layout_centerHorizontal="true"
+                android:paddingStart="@dimen/scale_15dp"
+                android:paddingEnd="@dimen/scale_15dp"
+                android:paddingBottom="@dimen/scale_15dp">
+
+                <TextView
+                    android:id="@+id/confirmation_header_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/cancel_transaction_confirmation"
+                    android:textColor="@color/sdkThemeColorPrimary"
+                    android:textSize="@dimen/scale_20sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/confirmation_header_text">
+
+                    <RadioButton
+                        android:id="@+id/modify_radio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/scale_15dp"
+                        android:buttonTint="@color/lightGrey"
+                        android:gravity="center_vertical|start"
+                        android:layoutDirection="ltr"
+                        android:paddingStart="@dimen/scale_5dp"
+                        android:paddingTop="@dimen/scale_15dp"
+                        android:paddingEnd="@dimen/scale_2dp"
+                        android:paddingBottom="@dimen/scale_15dp"
+                        android:text="@string/modify_order"
+                        android:textColor="@color/darkGrey"
+                        android:textSize="@dimen/scale_16sp" />
+
+                    <RadioButton
+                        android:id="@+id/card_not_listed_radio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/scale_15dp"
+                        android:buttonTint="@color/lightGrey"
+                        android:gravity="center_vertical|start"
+                        android:layoutDirection="ltr"
+                        android:paddingStart="@dimen/scale_5dp"
+                        android:paddingTop="@dimen/scale_15dp"
+                        android:paddingEnd="@dimen/scale_2dp"
+                        android:paddingBottom="@dimen/scale_15dp"
+                        android:text="@string/bank_card_not_there"
+                        android:textColor="@color/darkGrey"
+                        android:textSize="@dimen/scale_16sp" />
+
+                    <RadioButton
+                        android:id="@+id/currency_not_compatible_radio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/scale_15dp"
+                        android:buttonTint="@color/lightGrey"
+                        android:gravity="center_vertical|start"
+                        android:layoutDirection="ltr"
+                        android:paddingStart="@dimen/scale_5dp"
+                        android:paddingTop="@dimen/scale_15dp"
+                        android:paddingEnd="@dimen/scale_2dp"
+                        android:paddingBottom="@dimen/scale_15dp"
+                        android:text="@string/currency_not_compatible"
+                        android:textColor="@color/darkGrey"
+                        android:textSize="@dimen/scale_16sp" />
+
+                    <RadioButton
+                        android:id="@+id/pay_with_other_option_radio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/scale_15dp"
+                        android:buttonTint="@color/lightGrey"
+                        android:gravity="center_vertical|start"
+                        android:layoutDirection="ltr"
+                        android:paddingStart="@dimen/scale_5dp"
+                        android:paddingTop="@dimen/scale_15dp"
+                        android:paddingEnd="@dimen/scale_2dp"
+                        android:paddingBottom="@dimen/scale_15dp"
+                        android:text="@string/pay_with_other_option"
+                        android:textColor="@color/darkGrey"
+                        android:textSize="@dimen/scale_16sp" />
+
+                    <RadioButton
+                        android:id="@+id/not_interested_purchase_radio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/scale_15dp"
+                        android:buttonTint="@color/lightGrey"
+                        android:gravity="center_vertical|start"
+                        android:layoutDirection="ltr"
+                        android:paddingStart="@dimen/scale_5dp"
+                        android:paddingTop="@dimen/scale_15dp"
+                        android:paddingEnd="@dimen/scale_2dp"
+                        android:paddingBottom="@dimen/scale_15dp"
+                        android:text="@string/not_interested_in_purchase"
+                        android:textColor="@color/darkGrey"
+                        android:textSize="@dimen/scale_16sp" />
+
+                    <RadioButton
+                        android:id="@+id/other_reason_radio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/scale_15dp"
+                        android:buttonTint="@color/lightGrey"
+                        android:gravity="center_vertical|start"
+                        android:layoutDirection="ltr"
+                        android:paddingStart="@dimen/scale_5dp"
+                        android:paddingTop="@dimen/scale_15dp"
+                        android:paddingEnd="@dimen/scale_2dp"
+                        android:paddingBottom="@dimen/scale_15dp"
+                        android:text="@string/other"
+                        android:textColor="@color/darkGrey"
+                        android:textSize="@dimen/scale_16sp" />
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/cancellation_feedback_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/radio_group"
+                    android:layout_marginTop="@dimen/scale_10dp"
+                    android:background="@drawable/view_outline"
+                    android:enabled="false"
+                    android:gravity="start"
+                    android:hint="@string/cancellation_reason"
+                    android:minHeight="100dp"
+                    android:padding="@dimen/scale_5dp"
+                    android:textColor="@color/darkGrey"
+                    android:textColorHint="@color/lightGrey"
+                    android:textSize="@dimen/scale_16sp" />
+
+                <Button
+                    android:id="@+id/cancel_transaction_btn_sdk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cancellation_feedback_et"
+                    android:layout_marginTop="@dimen/scale_15dp"
+                    android:background="@color/sdkThemeColorPrimary"
+                    android:text="@string/cancel_transaction"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/scale_16sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_container_sdk"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    tools:context=".UI.Activity.PaymentDetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/safexpay_toolbar_main" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sdk_user_detail_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/toolbar_container"
+                android:layout_marginStart="@dimen/scale_20dp"
+                android:layout_marginTop="@dimen/scale_5dp"
+                android:layout_marginEnd="@dimen/scale_5dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@android:color/white"
+                app:contentPadding="@dimen/scale_5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/user_profile_iv_sdk"
+                        android:layout_width="@dimen/scale_10dp"
+                        android:layout_height="@dimen/scale_10dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_margin="@dimen/scale_5dp"
+                        android:background="@color/lightGrey" />
+
+                    <TextView
+                        android:id="@+id/user_contact_num_sdk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/user_profile_iv_sdk"
+                        android:text="7881120001"
+                        android:textColor="@color/lightGrey" />
+
+                    <View
+                        android:layout_width="@dimen/scale_1dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignTop="@id/user_contact_num_sdk"
+                        android:layout_alignBottom="@id/user_contact_num_sdk"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/scale_2dp"
+                        android:layout_toEndOf="@id/user_contact_num_sdk"
+                        android:background="@color/lightGrey" />
+
+                    <TextView
+                        android:id="@+id/user_contact_email_sdk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/scale_5dp"
+                        android:layout_toEndOf="@id/user_contact_num_sdk"
+                        android:paddingStart="@dimen/scale_2dp"
+                        android:text="xyz@xyz.com"
+                        android:textColor="@color/lightGrey" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sdk_user_detail_container"
+                android:layout_margin="@dimen/scale_5dp"
+                android:background="@color/sdkThemeColorAccent">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar_sdk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateTint="@android:color/darker_gray"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/pay_out_button_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/container"
+                android:layout_marginStart="@dimen/scale_40dp"
+                android:layout_marginTop="@dimen/scale_10dp"
+                android:layout_marginEnd="@dimen/scale_40dp"
+                android:layout_marginBottom="@dimen/scale_20dp"
+                android:background="@color/sdkThemeColorPrimary"
+                android:padding="@dimen/scale_15dp"
+                android:text="@string/pay_now"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/scale_18sp" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

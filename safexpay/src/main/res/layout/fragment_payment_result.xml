@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/scale_20dp"
+    tools:context=".UI.Fragment.PaymentResult">
+
+    <WebView
+        android:id="@+id/result_url_view_sdk"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/payment_result_header_tv_sdk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/payment_of_amount"
+        android:textSize="@dimen/scale_18sp"
+        android:layout_marginTop="@dimen/scale_20dp"
+        android:visibility="gone"
+        android:textColor="@color/lightGrey"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/payment_result_amount_tv_sdk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lightGrey"
+        android:layout_below="@id/payment_result_header_tv_sdk"
+        android:textSize="@dimen/scale_30sp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/scale_5dp"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/payment_result_status_iv_sdk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@id/payment_result_amount_tv_sdk"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/scale_30dp"
+        android:layout_marginBottom="@dimen/scale_10dp"/>
+
+    <TextView
+        android:id="@+id/payment_result_status_tv_sdk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@id/payment_result_status_iv_sdk"
+        android:textSize="@dimen/scale_18sp"
+        android:layout_marginTop="@dimen/scale_20dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/payment_result_order_no_tv_sdk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@id/payment_result_status_tv_sdk"
+        android:textSize="@dimen/scale_16sp"
+        android:layout_marginBottom="@dimen/scale_40dp"
+        android:layout_marginTop="@dimen/scale_10dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:gravity="center"/>
+</RelativeLayout>

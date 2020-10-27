@@ -1,0 +1,46 @@
+<resources>
+
+    <string name="title_fragment_choose_payment_list_option">Choose a Payment Option</string>
+    <string name="app_name">SafeXPay SDK</string>
+    <string name="cancel_transaction_confirmation">Why you want to cancel this transaction?</string>
+    <string name="other">Other reason</string>
+    <string name="not_interested_in_purchase">No more interested to purchase this product.</string>
+    <string name="pay_with_other_option">I want to pay with other payment option.</string>
+    <string name="currency_not_compatible">Currency is not compatible with payment gateway.</string>
+    <string name="bank_card_not_there">My bank/card is not listed in payment options.</string>
+    <string name="modify_order">I want to modify existing order.</string>
+    <string name="cancellation_reason">Please enter your cancellation reason here</string>
+    <string name="cancel_transaction">Cancel Transaction</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="proceed">PROCEED</string>
+    <string name="contact_details">CONTACT DETAILS</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_email_id">Enter Email ID</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="select_payment_mode">SELECT PAYMENT MODE</string>
+    <string name="back_to_payment_methods">BACK TO PAYMENT METHODS</string>
+    <string name="upi">UPI</string>
+    <string name="pay_using_upi_id">PAY USING UPI ID</string>
+    <string name="wallets">WALLET</string>
+    <string name="payment_of_amount">PAYMENT OF AMOUNT</string>
+    <string name="transaction_successful">TRANSACTION SUCCESSFUL</string>
+    <string name="transaction_failed">TRANSACTION FAILED</string>
+    <string name="transaction_cancelled">TRANSACTION CANCELLED</string>
+    <string name="try_again">TRY AGAIN</string>
+    <string name="saved_cards">SAVED CARDS</string>
+    <string name="payment_methods">PAYMENT METHODS</string>
+    <string name="pay_now">PAY NOW</string>
+    <string name="download">Download</string>
+    <string name="net_banking">Net Banking</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="debit_card">Debit Card</string>
+    <string name="emi">EMI</string>
+    <string name="pay_later">Pay Later</string>
+    <string name="fill_required_details">Please fill all the required details</string>
+    <string name="order_no_s">Order No. %s</string>
+    <string name="data_not_accurate">You must pass all the required fields correctly</string>
+    <string name="enter_valid_email">Enter a valid email</string>
+    <string name="enter_valid_mobile">Enter valid mobile number</string>
+</resources>

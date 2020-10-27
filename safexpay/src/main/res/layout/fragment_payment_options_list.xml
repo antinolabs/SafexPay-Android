@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/payment_options_container"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="@dimen/scale_10dp"
+    tools:context=".UI.Fragment.PaymentOptionsListFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/scale_10dp"
+        android:paddingEnd="@dimen/scale_10dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/user_details_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:background="@drawable/view_outline"
+            android:padding="@dimen/scale_10dp">
+            <ImageView
+                android:id="@+id/contact_iv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@android:color/holo_red_dark"
+                android:src="@android:drawable/sym_contact_card"/>
+            <TextView
+                android:id="@+id/user_contact_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/contact_iv_sdk"
+                android:text="+91-9876543210"
+                android:textSize="@dimen/scale_16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="@dimen/scale_10dp" />
+
+            <View
+                android:id="@+id/vertical_line_view"
+                android:layout_width="@dimen/scale_1dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/user_contact_phone_number"
+                android:layout_alignBottom="@id/user_contact_phone_number"
+                android:background="@android:color/darker_gray"
+                android:layout_toEndOf="@id/user_contact_phone_number"
+                android:layout_marginStart="@dimen/scale_5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/scale_5dp"
+                android:layout_toEndOf="@id/vertical_line_view"
+                android:textSize="@dimen/scale_14sp"
+                android:textColor="@color/grey"
+                android:text="test@test.com"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/saved_cards_tv_sdk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/saved_cards"
+            android:textColor="@color/lightGrey"
+            android:textSize="@dimen/scale_14sp"
+            android:layout_marginTop="@dimen/scale_10dp"
+            android:layout_marginBottom="@dimen/scale_10dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/saved_cards_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_methods"
+            android:textColor="@color/lightGrey"
+            android:textSize="@dimen/scale_14sp"
+            android:layout_marginTop="@dimen/scale_15dp"
+            android:layout_marginBottom="@dimen/scale_10dp"/>
+
+        <RelativeLayout
+            android:id="@+id/card_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/scale_10dp"
+            android:layout_marginTop="@dimen/scale_5dp"
+            android:background="@drawable/view_outline"
+            android:backgroundTint="@android:color/white">
+
+            <ImageView
+                android:id="@+id/card_iv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_card"
+                android:background="@color/sdkThemeColorLight"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/scale_10dp" />
+            <TextView
+                android:id="@+id/card_tv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/card_iv_sdk"
+                android:text="CREDIT/DEBIT/ATM CARD"
+                android:layout_centerVertical="true"
+                android:textColor="@color/darkGrey"
+                android:textSize="@dimen/scale_16sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/sdkThemeColorLight"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/net_banking_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/scale_10dp"
+            android:layout_marginTop="@dimen/scale_5dp"
+            android:background="@drawable/view_outline"
+            android:backgroundTint="@android:color/white">
+
+            <ImageView
+                android:id="@+id/net_banking_iv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_bank"
+                android:background="@color/sdkThemeColorLight"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/scale_10dp" />
+            <TextView
+                android:id="@+id/net_banking_tv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/net_banking_iv_sdk"
+                android:text="NET BANKING"
+                android:layout_centerVertical="true"
+                android:textColor="@color/darkGrey"
+                android:textSize="@dimen/scale_16sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/sdkThemeColorLight"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/wallet_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/scale_10dp"
+            android:layout_marginTop="@dimen/scale_5dp"
+            android:background="@drawable/view_outline"
+            android:backgroundTint="@android:color/white">
+
+            <ImageView
+                android:id="@+id/wallet_iv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_wallet"
+                android:background="@color/sdkThemeColorLight"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/scale_10dp" />
+            <TextView
+                android:id="@+id/wallet_tv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/wallet_iv_sdk"
+                android:text="WALLETS"
+                android:layout_centerVertical="true"
+                android:textColor="@color/darkGrey"
+                android:textSize="@dimen/scale_16sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/sdkThemeColorLight"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/upi_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/scale_10dp"
+            android:layout_marginTop="@dimen/scale_5dp"
+            android:background="@drawable/view_outline"
+            android:backgroundTint="@android:color/white">
+
+            <ImageView
+                android:id="@+id/upi_iv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_upi"
+                android:background="@color/sdkThemeColorLight"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/scale_10dp" />
+            <TextView
+                android:id="@+id/upi_tv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/upi_iv_sdk"
+                android:text="@string/upi"
+                android:textColor="@color/darkGrey"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/scale_16sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/sdkThemeColorLight"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/emi_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/scale_10dp"
+            android:layout_marginTop="@dimen/scale_5dp"
+            android:background="@drawable/view_outline"
+            android:backgroundTint="@android:color/white">
+
+            <ImageView
+                android:id="@+id/emi_iv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_emi"
+                android:background="@color/sdkThemeColorLight"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/scale_10dp" />
+            <TextView
+                android:id="@+id/emi_tv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/emi_iv_sdk"
+                android:text="EMI"
+                android:textColor="@color/darkGrey"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/scale_16sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/sdkThemeColorLight"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/pay_later_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/scale_10dp"
+            android:layout_marginTop="@dimen/scale_5dp"
+            android:background="@drawable/view_outline"
+            android:backgroundTint="@android:color/white">
+
+            <ImageView
+                android:id="@+id/pay_later_iv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_wallet"
+                android:tint="@color/sdkThemeColorLight"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/scale_10dp" />
+            <TextView
+                android:id="@+id/pay_later_tv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/pay_later_iv_sdk"
+                android:text="PAYLATER"
+                android:textColor="@color/darkGrey"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/scale_16sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/sdkThemeColorLight"/>
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>

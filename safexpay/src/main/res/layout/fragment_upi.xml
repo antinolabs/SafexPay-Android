@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="@dimen/scale_40dp"
+    tools:context=".UI.Fragment.UpiFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/upi_header_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/scale_15dp"
+        android:paddingBottom="@dimen/scale_15dp"
+        android:textColor="@color/darkGrey"
+        android:gravity="center_vertical"
+        android:layout_toEndOf="@id/nav_back_upi"
+        android:textSize="@dimen/scale_16sp"
+        android:text="@string/back_to_payment_methods"/>
+
+    <ImageView
+        android:id="@+id/nav_back_upi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/upi_header_text"
+        android:layout_alignBottom="@+id/upi_header_text"
+        android:background="@color/sdkThemeColorAccent"
+        android:paddingStart="@dimen/scale_10dp"
+        android:paddingEnd="@dimen/scale_10dp"
+        android:paddingTop="@dimen/scale_15dp"
+        android:paddingBottom="@dimen/scale_15dp"
+        android:rotation="180"
+        android:src="@drawable/ic_arrow_right"
+        android:layout_alignParentStart="true"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/upi_layout_bottom_card_sdk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/upi_header_text"
+            app:cardBackgroundColor="@android:color/white"
+            android:layout_marginStart="@dimen/scale_10dp"
+            android:layout_marginEnd="@dimen/scale_10dp"
+            android:layout_marginBottom="@dimen/scale_5dp"
+            app:contentPadding="@dimen/scale_5dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/upi_iv_fragment_sdk"
+                    android:layout_width="@dimen/scale_25dp"
+                    android:layout_height="@dimen/scale_25dp"
+                    android:padding="@dimen/scale_3dp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/sdkThemeColorLight"
+                    android:layout_marginStart="@dimen/scale_5dp"
+                    android:src="@drawable/ic_upi"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/scale_10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/upi_iv_fragment_sdk"
+                    android:textColor="@color/lightGrey"
+                    android:textSize="@dimen/scale_16sp"
+                    android:text="@string/upi"/>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/upi_qr_code_iv_sdk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/upi_layout_bottom_card_sdk"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/scale_10dp"/>
+
+        <Button
+            android:id="@+id/upi_qr_code_download_btn_sdk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/download"
+            android:background="@drawable/custom_button_bg"
+            android:paddingStart="@dimen/scale_5dp"
+            android:paddingEnd="@dimen/scale_5dp"
+            android:textColor="@color/blueColorDark"
+            android:layout_below="@id/upi_qr_code_iv_sdk"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/scale_10dp"
+            />
+        <TextView
+            android:id="@+id/pay_using_upi_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/upi_qr_code_download_btn_sdk"
+            android:layout_marginTop="@dimen/scale_20dp"
+            android:layout_marginStart="@dimen/scale_25dp"
+            android:text="@string/pay_using_upi_id"
+            android:textColor="@color/lightGrey"
+            android:textSize="@dimen/scale_12sp"/>
+
+        <RelativeLayout
+            android:id="@+id/bottom_container_upi_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pay_using_upi_tv"
+            android:padding="@dimen/scale_15dp"
+            android:layout_marginStart="@dimen/scale_10dp"
+            android:layout_marginEnd="@dimen/scale_10dp"
+            android:layout_marginTop="@dimen/scale_10dp"
+            android:background="@drawable/view_outline">
+
+            <ImageView
+                android:id="@+id/upi_fragment_iv"
+                android:layout_width="@dimen/scale_25dp"
+                android:layout_height="@dimen/scale_30dp"
+                android:layout_marginEnd="@dimen/scale_10dp"
+                android:src="@drawable/ic_upi"/>
+
+            <TextView
+                android:id="@+id/upi_id_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/upi_fragment_iv"
+                android:textColor="@color/darkGrey"
+                android:textSize="@dimen/scale_18sp"
+                android:text="UPI ID"
+                />
+            <TextView
+                android:id="@+id/upi_fragment_desc_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/upi_fragment_iv"
+                android:layout_below="@id/upi_id_tv"
+                android:textSize="@dimen/scale_12sp"
+                android:textColor="@color/darkGrey"
+                android:text="Google Pay, BHIM, PhonePe &amp; more"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/upi_id_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/upi_fragment_iv"
+                android:layout_below="@+id/upi_fragment_desc_tv"
+                android:layout_marginTop="@dimen/scale_10dp"
+                android:hint="Enter your UPI ID"
+                app:boxBackgroundMode="none"
+                app:boxBackgroundColor="@color/sdkThemeColorPrimary"
+                app:hintTextColor="@color/lightGrey"
+                android:textColorHint="@color/lightGrey">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/upi_id_et_sdk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:textColor="@color/darkGrey"
+                    android:padding="@dimen/scale_5dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</FrameLayout>

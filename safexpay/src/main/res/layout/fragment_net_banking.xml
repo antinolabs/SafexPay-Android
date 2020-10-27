@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/scale_100dp"
+    tools:context=".UI.Fragment.NetBankingFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/netbanking_header_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/nav_back_netbanking"
+            android:gravity="center_vertical"
+            android:paddingTop="@dimen/scale_15dp"
+            android:paddingBottom="@dimen/scale_15dp"
+            android:text="BACK TO PAYMENT METHODS"
+            android:textColor="@color/darkGrey"
+            android:textSize="@dimen/scale_16sp" />
+
+        <ImageView
+            android:id="@+id/nav_back_netbanking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/netbanking_header_text"
+            android:layout_alignBottom="@+id/netbanking_header_text"
+            android:layout_alignParentStart="true"
+            android:background="@color/sdkThemeColorAccent"
+            android:paddingStart="@dimen/scale_10dp"
+            android:paddingTop="@dimen/scale_15dp"
+            android:paddingEnd="@dimen/scale_10dp"
+            android:paddingBottom="@dimen/scale_15dp"
+            android:rotation="180"
+            android:src="@drawable/ic_arrow_right" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/net_banking_bottom_card_sdk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/netbanking_header_text"
+            app:cardBackgroundColor="@android:color/white"
+            android:layout_marginStart="@dimen/scale_10dp"
+            android:layout_marginEnd="@dimen/scale_10dp"
+            android:layout_marginBottom="@dimen/scale_5dp"
+            app:contentPadding="@dimen/scale_5dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/net_banking_iv_fragment_sdk"
+                    android:layout_width="@dimen/scale_25dp"
+                    android:layout_height="@dimen/scale_25dp"
+                    android:padding="@dimen/scale_3dp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/sdkThemeColorLight"
+                    android:layout_marginStart="@dimen/scale_5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/scale_10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/net_banking_iv_fragment_sdk"
+                    android:textColor="@color/lightGrey"
+                    android:textSize="@dimen/scale_16sp"
+                    android:text="NET BANKING"/>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/netbanking_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/net_banking_bottom_card_sdk"
+            android:layout_marginTop="@dimen/scale_5dp"
+            android:padding="@dimen/scale_10dp"
+            android:scrollbars="none" />
+
+        <TextView
+            android:id="@+id/select_bank_sdk_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/scale_10dp"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/netbanking_list_view"
+            android:textColor="@color/lightGrey"
+            android:textSize="@dimen/scale_16sp"
+            android:text="SELECT BANK"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/net_banking_select_bank_card_sdk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/select_bank_sdk_tv"
+            app:cardBackgroundColor="@android:color/white"
+            android:layout_margin="@dimen/scale_10dp"
+            app:cardElevation="@dimen/scale_2dp"
+            app:contentPadding="@dimen/scale_10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/select_bank_sdk_iv"
+                    android:layout_width="@dimen/scale_25dp"
+                    android:layout_height="@dimen/scale_25dp"
+                    android:padding="@dimen/scale_3dp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/sdkThemeColorLight"
+                    android:layout_marginStart="@dimen/scale_5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/scale_10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/select_bank_sdk_iv"
+                    android:textColor="@color/lightGrey"
+                    android:textSize="@dimen/scale_16sp"
+                    android:text="SELECT"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_right"
+                    android:tint="@color/sdkThemeColorLight"
+                    android:rotation="90"/>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</FrameLayout>

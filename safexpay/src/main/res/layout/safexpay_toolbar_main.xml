@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/header_view_toolbar_sdk"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/scale_80dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/sdkThemeColorPrimary"/>
+
+    <ImageView
+        android:id="@+id/sdk_close_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/scale_5dp"
+        android:layout_marginEnd="@dimen/scale_5dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:tint="@android:color/white" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/top_container_sdk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/scale_15dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="false"
+        app:contentPaddingTop="@dimen/scale_10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/logo_container_sdk"
+                android:layout_width="@dimen/scale_120dp"
+                android:layout_height="@dimen/scale_120dp"
+                android:layout_marginStart="@dimen/scale_15dp"
+                android:layout_marginEnd="@dimen/scale_5dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="@dimen/scale_5dp"
+                app:cardElevation="@dimen/scale_5dp"
+                app:cardUseCompatPadding="false"
+                app:contentPadding="@dimen/scale_5dp">
+                <ImageView
+                    android:id="@+id/safe_x_pay_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_safexpay_favicon_10"/>
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/logo_container_sdk">
+
+                <ImageView
+                    android:id="@+id/safe_x_pay_header"
+                    android:layout_width="@dimen/scale_130dp"
+                    android:layout_height="@dimen/scale_60dp"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/ic_grey_safexpay_icon"
+                    android:layout_marginStart="@dimen/scale_15dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/amount_card_container_sdk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/safe_x_pay_header"
+                    android:layout_marginEnd="@dimen/scale_5dp"
+                    android:layout_marginBottom="@dimen/scale_10dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardElevation="@dimen/scale_5dp"
+                    app:contentPaddingLeft="@dimen/scale_10dp"
+                    app:contentPaddingTop="@dimen/scale_5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/safe_x_order_amount_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total amount"
+                            android:textColor="@color/darkGrey"
+                            android:textSize="@dimen/scale_12sp" />
+
+                        <TextView
+                            android:id="@+id/safe_x_order_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/safe_x_order_amount_text"
+                            android:textColor="@color/darkGrey"
+                            android:textSize="@dimen/scale_25sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/safe_x_order_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@id/safe_x_order_amount"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/scale_5dp"
+                            android:layout_marginBottom="@dimen/scale_2dp"
+                            android:gravity="bottom|end"
+                            android:textColor="@color/darkGrey"
+                            android:textSize="@dimen/scale_12sp" />
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/bank_item_container"
+    android:background="@drawable/view_outline"
+    android:backgroundTint="@android:color/white"
+    android:layout_margin="@dimen/scale_2dp"
+    android:padding="@dimen/scale_5dp">
+
+    <ImageView
+        android:id="@+id/bank_image_sdk"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:background="@color/sdkThemeColorAccent"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/scale_16sp"
+        android:textColor="@color/darkGrey"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/scale_5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/bank_image_sdk"
+        android:layout_marginStart="@dimen/scale_10dp" />
+</RelativeLayout>
