@@ -88,21 +88,26 @@ public class PaymentDetailActivity extends BaseActivity implements View.OnClickL
         SessionStore.headingColor = brandingData.getMerchantThemeDetails().getHeadingBgcolor();
         SessionStore.bgColor = brandingData.getMerchantThemeDetails().getBgcolor();
         SessionStore.footerColor = brandingData.getMerchantThemeDetails().getFooterColor();
+        SessionStore.brandingLogo = brandingData.getLogo();
 
         //set views with colors and resources
-        try {
-            Glide.with(PaymentDetailActivity.this)
-                    .load(brandingData.getLogo())
-                    .error(getResources().getDrawable(R.drawable.ic_safexpay_favicon_10))
-                    .into(toolbarMainBinding.safeXPayLogo);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        setBrandingLogo();
         toolbarMainBinding.headerViewToolbarSdk.setBackgroundColor(Color.parseColor(SessionStore.headingColor));
         binding.container.setBackgroundColor(Color.parseColor(SessionStore.bgColor));
         binding.payOutButtonCard.setBackgroundColor(Color.parseColor(SessionStore.headingColor));
         binding.mainContainerSdk.setVisibility(View.VISIBLE);
         loadLoginFragment();
+    }
+
+    private void setBrandingLogo() {
+        try {
+            Glide.with(PaymentDetailActivity.this)
+                    .load(SessionStore.brandingLogo)
+                    .error(getResources().getDrawable(R.drawable.ic_safexpay_favicon_10))
+                    .into(toolbarMainBinding.safeXPayLogo);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void fireBroadcastAndReturn(int resultCode, Bundle data, String message) {
@@ -136,6 +141,7 @@ public class PaymentDetailActivity extends BaseActivity implements View.OnClickL
     private void loadPaymentResultFragment(String htmlContent) {
         clearFragmentStack();
         loadFragment(new PaymentResult(htmlContent), false);
+        setBrandingLogo();
         binding.payOutButtonCard.setVisibility(View.GONE);
         toolbarMainBinding.amountCardContainerSdk.setVisibility(View.INVISIBLE);
     }

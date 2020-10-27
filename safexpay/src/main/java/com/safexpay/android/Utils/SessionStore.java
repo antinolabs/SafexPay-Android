@@ -5,6 +5,7 @@ public class SessionStore {
     public static String headingColor = "";
     public static String bgColor = "";
     public static String footerColor = "";
+    public static String brandingLogo = "";
     public static String merchantKey = "";
     public static String merchantId = "";
     public static String PG_ID = "";
@@ -24,6 +25,7 @@ public class SessionStore {
         footerColor = "";
         merchantKey = "";
         merchantId = "";
+        brandingLogo = "";
         PG_ID = "";
         PAYMODE_ID = "";
         SCHEME_ID = "";
