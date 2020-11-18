@@ -27,7 +27,7 @@ repositories {
 <li>Add the <code>SafeXPay dependency</code> to your app level<code>build.gradle</code> dependencies.<br><br>
 <pre><code>dependencies {
     ...
-    implementation 'com.github.antinolabs:SafexPay-Android-SDK:<a href="https://github.com/antinolabs/SafexPay-Android-SDK/releases" rel="nofollow">latest_version</a>'
+    implementation 'com.github.antinolabs:SafexPay-Android:<a href="https://github.com/antinolabs/SafexPay-Android-SDK/releases" rel="nofollow">latest_version</a>'
     ...
   }</code></pre>
 </li>
