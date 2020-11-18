@@ -43,6 +43,8 @@ public class NetBankingFragment extends BaseFragment implements View.OnClickList
     }
 
     private void init() {
+        for (PaymentMode.PaymentModeDetailsList paymentBank : paymentBankList)
+            paymentBank.setSelected(false);
         binding.netbankingListView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         binding.netbankingListView.setAdapter(new BankListAdapter(getActivity(), paymentBankList, payModeId));
         binding.navBackNetbanking.setOnClickListener(this);

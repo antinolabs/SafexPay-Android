@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/amount_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_the_amount_to_pay"
+        android:gravity="center"
+        android:textSize="@dimen/scale_18sp"
+        android:layout_margin="@dimen/scale_20dp"
+        android:layout_centerInParent="true"/>
+    <Button
+        android:id="@+id/pay_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Proceed to payment"
+        android:padding="@dimen/scale_15dp"
+        android:background="@color/colorAccent"
+        android:layout_below="@id/amount_et"
+       android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

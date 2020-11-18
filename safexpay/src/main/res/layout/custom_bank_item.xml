@@ -11,8 +11,10 @@
 
     <ImageView
         android:id="@+id/bank_image_sdk"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="70dp"
+        android:minHeight="70dp"
         android:background="@color/sdkThemeColorAccent"
         android:layout_centerHorizontal="true"/>
 
@@ -27,4 +29,13 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/bank_image_sdk"
         android:layout_marginStart="@dimen/scale_10dp" />
+
+    <ImageView
+        android:id="@+id/selectedIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/scale_5dp"
+        android:src="@drawable/ic_checked"/>
 </RelativeLayout>

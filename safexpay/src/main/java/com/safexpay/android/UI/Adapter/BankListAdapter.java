@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.safexpay.android.Model.PaymentMode;
 import com.safexpay.android.R;
 import com.safexpay.android.Utils.SessionStore;
@@ -29,7 +30,7 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BankLi
         this.paymentBankList = paymentBankList;
     }
 
-    class BankListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class BankListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public BankListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -38,13 +39,27 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BankLi
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.bank_item_container){
-                binding.bankItemContainer.setBackgroundColor(Color.parseColor(SessionStore.menuColor));
-                SessionStore.PG_ID = paymentBankList.get(getAdapterPosition()).getPgDetailsResponse().getPgId();
-                SessionStore.SCHEME_ID = paymentBankList.get(getAdapterPosition()).getSchemeDetailsResponse().getSchemeId();
-                SessionStore.PAYMODE_ID = payModeId;
+            if (v.getId() == R.id.bank_item_container) {
+                int pos = getAdapterPosition();
+                selectCard(pos);
+                try {
+                    SessionStore.PG_ID = paymentBankList.get(pos).getPgDetailsResponse().getPgId();
+                    SessionStore.SCHEME_ID = paymentBankList.get(pos).getSchemeDetailsResponse().getSchemeId();
+                    SessionStore.PAYMODE_ID = payModeId;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
+    }
+
+    public void selectCard(int position) {
+        for (int i = 0; i < paymentBankList.size(); i++) {
+            if (i == position)
+                paymentBankList.get(position).setSelected(true);
+            else paymentBankList.get(i).setSelected(false);
+        }
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -56,12 +71,16 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BankLi
 
     @Override
     public void onBindViewHolder(@NonNull BankListViewHolder holder, int position) {
-        binding.itemName.setText(paymentBankList.get(position).getPgDetailsResponse().getPgName());
+        PaymentMode.PaymentModeDetailsList item = paymentBankList.get(position);
+        binding.itemName.setText(item.getPgDetailsResponse().getPgName());
+        if (item.getSelected())
+            binding.selectedIv.setVisibility(View.VISIBLE);
+        else binding.selectedIv.setVisibility(View.GONE);
+        Glide.with(context).load(item.getPgDetailsResponse().getPgIcon()).into(binding.bankImageSdk);
     }
 
     @Override
     public int getItemCount() {
         return paymentBankList.size();
     }
-
 }

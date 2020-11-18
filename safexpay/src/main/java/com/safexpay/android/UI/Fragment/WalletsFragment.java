@@ -47,6 +47,8 @@ public class WalletsFragment extends BaseFragment implements View.OnClickListene
     private void init() {
         binding.navBackWallet.setOnClickListener(this);
         binding.walletHeaderText.setOnClickListener(this);
+        for (PaymentMode.PaymentModeDetailsList paymentModeDetailsList : paymentWalletList)
+            paymentModeDetailsList.setSelected(false);
         binding.walletListView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         binding.walletListView.setAdapter(new WalletsAdapter(getActivity(), paymentWalletList, payModeId));
     }

@@ -52,6 +52,7 @@ public class PaymentMode{
         @SerializedName("webViewUrl")
         @Expose
         private String webViewUrl;
+        private Boolean isSelected = false;
 
         public SchemeDetailsResponse getSchemeDetailsResponse() {
             return schemeDetailsResponse;
@@ -77,6 +78,13 @@ public class PaymentMode{
             this.webViewUrl = webViewUrl;
         }
 
+        public Boolean getSelected() {
+            return isSelected;
+        }
+
+        public void setSelected(Boolean selected) {
+            isSelected = selected;
+        }
     }
 
     public class PgDetailsResponse {
@@ -87,6 +95,9 @@ public class PaymentMode{
         @SerializedName("pg_name")
         @Expose
         private String pgName;
+        @SerializedName("pg_icon")
+        @Expose
+        private String pgIcon;
 
         public String getPgId() {
             return pgId;
@@ -102,6 +113,14 @@ public class PaymentMode{
 
         public void setPgName(String pgName) {
             this.pgName = pgName;
+        }
+
+        public String getPgIcon() {
+            return pgIcon;
+        }
+
+        public void setPgIcon(String pgIcon) {
+            this.pgIcon = pgIcon;
         }
     }
 

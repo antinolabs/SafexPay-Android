@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DemoPaymentApp</string>
+    <string name="enter_the_amount_to_pay">Enter the amount to pay</string>
+    <string name="something_went_Wrong">Something went wrong</string>
+</resources>

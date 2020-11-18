@@ -55,7 +55,8 @@ public class PaymentDetailActivity extends BaseActivity implements View.OnClickL
         binding.mainContainerSdk.setVisibility(View.GONE);
         toolbarMainBinding.sdkCloseIv.setOnClickListener(this);
         binding.payOutButtonCard.setOnClickListener(this);
-        toolbarMainBinding.safeXOrderAmount.setText(String.format("₹%s", getIntent().getStringExtra(Constants.AMOUNT)));
+        toolbarMainBinding.safeXOrderAmount.setText(String.format("%s%s", getIntent().getStringExtra(Constants.AMOUNT),
+                getIntent().getStringExtra(Constants.CURRENCY)));
         toolbarMainBinding.safeXOrderId.setText(String.format(getString(R.string.order_no_s), getIntent().getStringExtra(Constants.ORDER_NO)));
         SessionStore.merchantId = getIntent().getStringExtra(Constants.MERCHANT_ID);
         SessionStore.merchantKey = getIntent().getStringExtra(Constants.MERCHANT_KEY);

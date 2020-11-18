@@ -41,7 +41,10 @@ public class ConfirmationFragment extends DialogFragment implements View.OnClick
         setCancelable(false);
         binding.cancelTransactionBtnSdk.setOnClickListener(this);
         binding.closeCancellationDialog.setOnClickListener(this);
-        binding.cancelTransactionBtnSdk.setBackgroundColor(Color.parseColor(SessionStore.headingColor));
+        if (!SessionStore.headingColor.isEmpty())
+            binding.cancelTransactionBtnSdk.setBackgroundColor(Color.parseColor(SessionStore.headingColor));
+        else
+            binding.cancelTransactionBtnSdk.setBackgroundColor(getResources().getColor(R.color.sdkThemeColorPrimary));
         binding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

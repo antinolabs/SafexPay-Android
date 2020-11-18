@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.safexpay.android.Model.PaymentMode;
 import com.safexpay.android.R;
 import com.safexpay.android.Utils.SessionStore;
@@ -40,7 +41,19 @@ public class WalletsAdapter extends RecyclerView.Adapter<WalletsAdapter.WalletsV
     public void onBindViewHolder(@NonNull WalletsViewHolder holder, int position) {
         PaymentMode.PaymentModeDetailsList item = paymentWalletList.get(position);
         binding.itemName.setText(item.getPgDetailsResponse().getPgName());
-//        binding.bankImageSdk.setImageDrawable(context.getResources().getDrawable(item.getDrawable()));
+        if (item.getSelected())
+            binding.selectedIv.setVisibility(View.VISIBLE);
+        else binding.selectedIv.setVisibility(View.GONE);
+        Glide.with(context).load(item.getPgDetailsResponse().getPgIcon()).into(binding.bankImageSdk);
+    }
+
+    public void selectCard(int position) {
+        for (int i = 0; i < paymentWalletList.size(); i++) {
+            if (i == position)
+                paymentWalletList.get(position).setSelected(true);
+            else paymentWalletList.get(i).setSelected(false);
+        }
+        notifyDataSetChanged();
     }
 
     @Override
@@ -57,10 +70,15 @@ public class WalletsAdapter extends RecyclerView.Adapter<WalletsAdapter.WalletsV
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.bank_item_container){
-                binding.bankItemContainer.setBackgroundColor(Color.parseColor(SessionStore.menuColor));
-                SessionStore.PG_ID = paymentWalletList.get(getAdapterPosition()).getPgDetailsResponse().getPgId();
-                SessionStore.SCHEME_ID = paymentWalletList.get(getAdapterPosition()).getSchemeDetailsResponse().getSchemeId();
+                int pos = getAdapterPosition();
+                selectCard(pos);
+                try {
+                SessionStore.PG_ID = paymentWalletList.get(pos).getPgDetailsResponse().getPgId();
+                SessionStore.SCHEME_ID = paymentWalletList.get(pos).getSchemeDetailsResponse().getSchemeId();
                 SessionStore.PAYMODE_ID = payModeId;
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }
     }
