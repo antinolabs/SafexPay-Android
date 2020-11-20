@@ -168,6 +168,7 @@
                 android:id="@+id/card_number_et_sdk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:background="@android:color/white"
                 android:textColor="@color/darkGrey"
                 android:padding="@dimen/scale_5dp"/>
@@ -198,6 +199,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/month_et_sdk"
                     android:layout_width="match_parent"
+                    android:inputType="number"
+                    android:maxLength="5"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
                     android:textColor="@color/darkGrey"
@@ -225,6 +228,7 @@
                     android:background="@android:color/white"
                     android:textColor="@color/darkGrey"
                     android:maxLength="3"
+                    android:inputType="number"
                     android:padding="@dimen/scale_5dp"/>
             </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
