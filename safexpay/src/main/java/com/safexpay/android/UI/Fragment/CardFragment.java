@@ -102,40 +102,41 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 currentLength = binding.monthEtSdk.getText().toString().trim().length();
+
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                String date = s.toString().trim().replaceAll(" ", "");
-                String modifiedDate = date;
-
-                boolean backPressed = previousLength > currentLength;
-                if (backPressed) {
-                    if (date.length() == 3) {
-                        modifiedDate = date.substring(0, 2);
+                if (previousLength <= currentLength && currentLength < 3) {
+                    int month = Integer.parseInt(binding.monthEtSdk.getText().toString());
+                    if (currentLength == 1 && month >= 2) {
+                        String autoFixStr = "0" + month + "/";
+                        binding.monthEtSdk.setText(autoFixStr);
+                        binding.monthEtSdk.setSelection(3);
                     }
-                } else {
-                    if (date.length() == 2) {
-                        modifiedDate = date + "/";
-                    } else if (previousLength == 2) {
-                        modifiedDate = date.substring(0, 2) + "/" + date.substring(2, date.length());
-                    }
-                }
 
-                applyDateText(binding.monthEtSdk, this, modifiedDate);
-                if (modifiedDate.length() == 5) {
+                    else if (currentLength == 2 && month <= 12) {
+                        String autoFixStr = binding.monthEtSdk.getText().toString() + "/";
+                        binding.monthEtSdk.setText(autoFixStr);
+                        binding.monthEtSdk.setSelection(3);
+                    } else if (currentLength ==2 && month > 12) {
+                        binding.monthEtSdk.setText("1");
+                        binding.monthEtSdk.setSelection(2);
+                    }
+                } else if (currentLength == 5) {
                     binding.cvvEtSdk.requestFocus();
                 }
             }
         });
 
-        binding.cardNumberEtSdk.post(new Runnable() {
+        binding.nameOnCardEt.post(new Runnable() {
             @Override
             public void run() {
-                binding.cardNumberEtSdk.requestFocus();
+                binding.nameOnCardEt.requestFocus();
                 InputMethodManager lManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (lManager != null) {
-                    lManager.showSoftInput(binding.cardNumberEtSdk, InputMethodManager.SHOW_IMPLICIT);
+                    lManager.showSoftInput(binding.nameOnCardEt, InputMethodManager.SHOW_IMPLICIT);
                 }
             }
         });
@@ -163,12 +164,7 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
-    private void applyDateText(TextInputEditText dateBox, TextWatcher textWatcher, String modifiedDate) {
-        dateBox.removeTextChangedListener(textWatcher);
-        dateBox.setText(modifiedDate);
-        dateBox.setSelection(modifiedDate.length());
-        dateBox.addTextChangedListener(textWatcher);
-    }
+
 
     @Override
     public void onClick(View v) {
@@ -220,8 +216,7 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
         private int previousLength = 0, currentLength = 0;
         private CardTypes cardType = CardTypes.UNKNOWN;
 
-        public CustomTextWatcher() {
-        }
+
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
