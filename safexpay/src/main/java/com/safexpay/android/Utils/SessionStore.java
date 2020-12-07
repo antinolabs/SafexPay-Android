@@ -12,6 +12,12 @@ public class SessionStore {
     public static String PAYMODE_ID = "";
     public static String SCHEME_ID = "";
     public static String EMI_MONTHS = "7";
+    public static String Card_Number = "";
+    public static String Card_Holder_Name = "";
+    public static String Cvv = "";
+    public static String Exp_Date = "";
+    public static String Upi_Id = "";
+
 
     //Success keys
     public static String successOrderId = "";
@@ -30,6 +36,12 @@ public class SessionStore {
         PAYMODE_ID = "";
         SCHEME_ID = "";
         EMI_MONTHS = "7";
+        Card_Number = "";
+        Card_Holder_Name = "";
+        Cvv = "";
+        Exp_Date = "";
+        Upi_Id = "";
+
     }
 
     public static void clearPaymentIds() {
