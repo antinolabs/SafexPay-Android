@@ -15,8 +15,10 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.safexpay.android.Model.PaymentMode;
 import com.safexpay.android.Model.SavedCards;
 import com.safexpay.android.R;
 import com.safexpay.android.UI.Activity.BaseActivity;
@@ -46,6 +48,7 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
     private CustomTextWatcher textWatcher;
     private String payModeId;
     private List<SavedCards> savedCardsList = new ArrayList<>();
+    private List<PaymentMode.PaymentModeDetailsList> CardsList = new ArrayList<>();
 
 
     public CardFragment() {
@@ -58,10 +61,10 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
         return form;
     }
 
-    public static CardFragment getCardForm(Mode mode, List<SavedCards> savedCardsList, String payModeId) {
+    public static CardFragment getCardForm(Mode mode, List<PaymentMode.PaymentModeDetailsList> savedCardsList, String payModeId) {
         CardFragment form = new CardFragment();
         form.mode = mode;
-        form.savedCardsList = savedCardsList;
+        form.CardsList = savedCardsList;
         form.payModeId = payModeId;
         return form;
     }
@@ -77,20 +80,68 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
 
     private void init() {
         //setting recyclerview
-        binding.savedCardsRecycler.setAdapter(new SavedCardsAdapter(getContext(), savedCardsList, payModeId));
+        binding.savedCardsRecycler.setAdapter(new SavedCardsAdapter(getContext(), savedCardsList, "DC"));
         binding.savedCardsRecycler.addItemDecoration(new RecyclerUtils.LinePagerIndicatorDecoration());
         new RecyclerUtils.ScrollByOneItem().attachToRecyclerView(binding.savedCardsRecycler);
+        SessionStore.PG_ID = "107";
+        SessionStore.PAYMODE_ID = payModeId;
+
+
+
 
         //click listeners
         binding.navBackCard.setOnClickListener(this);
         binding.savedCardSdkTv.setOnClickListener(this);
         binding.showHideArrowIvCards.setOnClickListener(this);
 
+
         //editboxes
         binding.cardNumberEtSdk.setNextFocusDownId(R.id.month_et_sdk);
         binding.cardNumberEtSdk.addTextChangedListener(textWatcher = new CustomTextWatcher());
         binding.cardNumberEtSdk.setOnKeyListener(this);
         binding.monthEtSdk.setNextFocusDownId(R.id.cvv_et_sdk);
+        binding.nameOnCardEt.setSingleLine(true);
+        SessionStore.Card_Holder_Name = binding.nameOnCardEt.getText().toString().trim();
+        SessionStore.Cvv = binding.cvvEtSdk.getText().toString();
+        binding.nameOnCardEt.addTextChangedListener(new TextWatcher() {
+            private int previousLength = 0, currentLength = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                previousLength = binding.monthEtSdk.getText().toString().trim().length();
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                SessionStore.Card_Holder_Name = binding.nameOnCardEt.getText().toString();
+            }
+        });
+
+        binding.cvvEtSdk.addTextChangedListener(new TextWatcher() {
+            private int previousLength = 0, currentLength = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                previousLength = binding.cvvEtSdk.getText().toString().trim().length();
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                SessionStore.Cvv = binding.cvvEtSdk.getText().toString();
+            }
+        });
         binding.monthEtSdk.addTextChangedListener(new TextWatcher() {
             private int previousLength = 0, currentLength = 0;
 
@@ -114,20 +165,24 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
                         String autoFixStr = "0" + month + "/";
                         binding.monthEtSdk.setText(autoFixStr);
                         binding.monthEtSdk.setSelection(3);
-                    }
-
-                    else if (currentLength == 2 && month <= 12) {
+                    } else if (currentLength == 2 && month <= 12) {
                         String autoFixStr = binding.monthEtSdk.getText().toString() + "/";
                         binding.monthEtSdk.setText(autoFixStr);
                         binding.monthEtSdk.setSelection(3);
-                    } else if (currentLength ==2 && month > 12) {
+                    } else if (currentLength == 2 && month > 12) {
                         binding.monthEtSdk.setText("1");
                         binding.monthEtSdk.setSelection(2);
+
                     }
+
                 } else if (currentLength == 5) {
                     binding.cvvEtSdk.requestFocus();
+
                 }
+                SessionStore.Exp_Date = binding.monthEtSdk.getText().toString();
+
             }
+
         });
 
         binding.nameOnCardEt.post(new Runnable() {
@@ -140,6 +195,8 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
                 }
             }
         });
+
+
     }
 
     private void slide_down() {
@@ -165,12 +222,12 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
     }
 
 
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.saved_card_sdk_tv || id == R.id.show_hide_arrow_iv_cards) {
             toggle_contents(binding.savedCardsRecycler);
+
         } else if (id == R.id.nav_back_card) {
             if (getFragmentManager() != null) {
                 getFragmentManager().popBackStack();
@@ -217,7 +274,6 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
         private CardTypes cardType = CardTypes.UNKNOWN;
 
 
-
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             previousLength = binding.cardNumberEtSdk.getText().toString().trim().length();
@@ -232,6 +288,9 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
             // Do this only for few characters not for entire card number
             cardType = CardUtils.getCardType(cardNumber);
             drawable = cardType.getImageResource();
+            CardTypes pos = cardType;
+
+
 
             /*if (cardType == CardTypes.UNKNOWN || cardType == CardTypes.MAESTRO) {
                 clearOptionalValidators();
@@ -269,9 +328,13 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
                 CardTypes cardType = CardUtils.getCardType(cardNumber);
                 switch (cardType) {
                     case VISA:
+                        SessionStore.SCHEME_ID = checkSchemeId("VISA");
                     case MASTER_CARD:
+                        SessionStore.SCHEME_ID = checkSchemeId("MASTER_CARD");
                     case DISCOVER:
                     case RUPAY:
+                        SessionStore.SCHEME_ID = checkSchemeId("RUPAY");
+
                         for (int index = 1; index < data.length; index++) {
                             modifiedCard = modifiedCard + data[index];
                             if (index == 4 || index == 8 || index == 12) {
@@ -280,7 +343,9 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
                             }
                         }
 
+
                         binding.cvvEtSdk.setFilters(new InputFilter[]{new InputFilter.LengthFilter(cardType.getCvvLength())});
+
                         break;
                     case AMEX:
                         for (int index = 1; index < data.length; index++) {
@@ -288,6 +353,7 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
                             if (index == 4 || index == 11) {
                                 modifiedCard = modifiedCard + " ";
                                 cardNumberSelection++;
+
                             }
                         }
                         binding.cvvEtSdk.setFilters(new InputFilter[]{new InputFilter.LengthFilter(cardType.getCvvLength())});
@@ -298,18 +364,40 @@ public class CardFragment extends BaseFragment implements View.OnClickListener, 
                             if (index == 4 || index == 10) {
                                 modifiedCard = modifiedCard + " ";
                                 cardNumberSelection++;
+
+
                             }
                         }
-                        binding.cvvEtSdk.setFilters(new InputFilter[]{new InputFilter.LengthFilter(cardType.getCvvLength())});
+                        binding.cvvEtSdk.setFilters(new InputFilter[]{new InputFilter.LengthFilter(cardType.getCvvLength())
+
+                                }
+
+                        );
+
                         break;
                     default:
                         modifiedCard = cardNumber;
+
                 }
             } else {
                 modifiedCard = cardNumber;
             }
             applyText(binding.cardNumberEtSdk, this, modifiedCard);
+            SessionStore.Card_Number = binding.cardNumberEtSdk.getText().toString();
+
+
         }
+
+    }
+
+    private String checkSchemeId(String cardType) {
+        String schemeId = "";
+        for (PaymentMode.PaymentModeDetailsList list : CardsList) {
+            if (list.getSchemeDetailsResponse().getSchemeName().equals(cardType)) {
+                schemeId = list.getSchemeDetailsResponse().getSchemeId();
+            }
+        }
+        return schemeId;
     }
 
     private void applyText(TextInputEditText editText, TextWatcher watcher, String text) {
