@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/scale_10dp"
     tools:context=".UI.Fragment.CardFragment">
 
@@ -15,13 +15,13 @@
             android:id="@+id/card_header_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/nav_back_card"
+            android:gravity="center_vertical"
             android:paddingTop="@dimen/scale_15dp"
             android:paddingBottom="@dimen/scale_15dp"
+            android:text="@string/back_to_payment_methods"
             android:textColor="@color/darkGrey"
-            android:gravity="center_vertical"
-            android:layout_toEndOf="@id/nav_back_card"
-            android:textSize="@dimen/scale_16sp"
-            android:text="@string/back_to_payment_methods"/>
+            android:textSize="@dimen/scale_16sp" />
 
         <ImageView
             android:id="@+id/nav_back_card"
@@ -29,45 +29,58 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/card_header_text"
             android:layout_alignBottom="@+id/card_header_text"
+            android:layout_alignParentStart="true"
             android:background="@color/sdkThemeColorAccent"
             android:paddingStart="@dimen/scale_10dp"
-            android:paddingEnd="@dimen/scale_10dp"
             android:paddingTop="@dimen/scale_15dp"
+            android:paddingEnd="@dimen/scale_10dp"
             android:paddingBottom="@dimen/scale_15dp"
             android:rotation="180"
-            android:src="@drawable/ic_arrow_right"
-            android:layout_alignParentStart="true"/>
+            android:src="@drawable/ic_arrow_right" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_layout_bottom_card_sdk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/card_header_text"
-            app:cardBackgroundColor="@android:color/white"
             android:layout_marginStart="@dimen/scale_10dp"
             android:layout_marginEnd="@dimen/scale_10dp"
             android:layout_marginBottom="@dimen/scale_5dp"
+            app:cardBackgroundColor="@android:color/white"
             app:contentPadding="@dimen/scale_5dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:id="@+id/card_iv_fragment_sdk"
                     android:layout_width="@dimen/scale_25dp"
                     android:layout_height="@dimen/scale_25dp"
-                    android:padding="@dimen/scale_3dp"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/scale_5dp"
                     android:background="@color/sdkThemeColorLight"
-                    android:layout_marginStart="@dimen/scale_5dp"/>
+                    android:padding="@dimen/scale_3dp" />
+
                 <TextView
+                    android:id="@+id/selected_card_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/scale_10dp"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/scale_10dp"
                     android:layout_toEndOf="@id/card_iv_fragment_sdk"
+                    android:text="CARD PAYMENT"
                     android:textColor="@color/lightGrey"
-                    android:textSize="@dimen/scale_16sp"
-                    android:text="CREDIT/DEBIT/ATM CARD"/>
+                    android:textSize="@dimen/scale_16sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/card_iv_fragment_sdk"
+                    android:visibility="gone"
+                    tools:listitem="@layout/custom_card_item">
+
+                </androidx.recyclerview.widget.RecyclerView>
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
@@ -76,18 +89,18 @@
             android:id="@+id/saved_card_sdk_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/scale_5dp"
-            android:paddingTop="@dimen/scale_2dp"
-            android:paddingBottom="@dimen/scale_2dp"
-            android:paddingStart="@dimen/scale_5dp"
-            android:paddingEnd="@dimen/scale_2dp"
-            android:layout_marginStart="@dimen/scale_10dp"
-            android:layout_toStartOf="@id/show_hide_arrow_iv_cards"
             android:layout_below="@id/card_layout_bottom_card_sdk"
-            android:textColor="@color/lightGrey"
+            android:layout_marginStart="@dimen/scale_10dp"
+            android:layout_marginTop="@dimen/scale_5dp"
+            android:layout_toStartOf="@id/show_hide_arrow_iv_cards"
             android:background="@android:color/white"
-            android:textSize="@dimen/scale_16sp"
-            android:text="@string/saved_cards"/>
+            android:paddingStart="@dimen/scale_5dp"
+            android:paddingTop="@dimen/scale_2dp"
+            android:paddingEnd="@dimen/scale_2dp"
+            android:paddingBottom="@dimen/scale_2dp"
+            android:text="@string/saved_cards"
+            android:textColor="@color/lightGrey"
+            android:textSize="@dimen/scale_16sp" />
 
         <ImageView
             android:id="@+id/show_hide_arrow_iv_cards"
@@ -96,27 +109,27 @@
             android:layout_alignTop="@id/saved_card_sdk_tv"
             android:layout_alignBottom="@id/saved_card_sdk_tv"
             android:layout_alignParentEnd="true"
-            android:paddingEnd="@dimen/scale_5dp"
-            android:paddingStart="@dimen/scale_5dp"
-            android:background="@android:color/white"
-            android:src="@drawable/ic_arrow_right"
-            android:layout_marginEnd="@dimen/scale_10dp"
             android:layout_centerVertical="true"
-            android:rotation="90"/>
+            android:layout_marginEnd="@dimen/scale_10dp"
+            android:background="@android:color/white"
+            android:paddingStart="@dimen/scale_5dp"
+            android:paddingEnd="@dimen/scale_5dp"
+            android:rotation="90"
+            android:src="@drawable/ic_arrow_right" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/saved_cards_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_below="@id/saved_card_sdk_tv"
-            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/scale_10dp"
+            android:layout_marginTop="@dimen/scale_5dp"
+            android:layout_marginEnd="@dimen/scale_10dp"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginTop="@dimen/scale_5dp"
-            android:layout_marginStart="@dimen/scale_10dp"
-            android:layout_marginEnd="@dimen/scale_10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <RelativeLayout
             android:id="@+id/bottom_container"
@@ -124,54 +137,59 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/saved_cards_recycler"
             android:layout_margin="@dimen/scale_10dp">
+
             <TextView
                 android:id="@+id/add_new_card_sdk_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/scale_10dp"
+                android:text="ADD NEW CARD"
                 android:textColor="@color/lightGrey"
-                android:textSize="@dimen/scale_14sp"
-                android:text="ADD NEW CARD"/>
+                android:textSize="@dimen/scale_14sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/name_on_card_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name On Card"
-                app:boxBackgroundMode="none"
-                android:layout_marginTop="@dimen/scale_10dp"
                 android:layout_below="@id/add_new_card_sdk_tv"
+                android:layout_marginTop="@dimen/scale_10dp"
+                android:hint="Name On Card"
+                android:textColorHint="@color/lightGrey"
                 app:boxBackgroundColor="@color/sdkThemeColorPrimary"
-                app:hintTextColor="@color/lightGrey"
-                android:textColorHint="@color/lightGrey">
+                app:boxBackgroundMode="none"
+                app:hintTextColor="@color/lightGrey">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name_on_card_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:textColor="@color/darkGrey"
-                    android:padding="@dimen/scale_5dp"/>
+                    android:lines="1"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/scale_5dp"
+                    android:textColor="@color/darkGrey" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/card_number_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Card Number"
-                app:boxBackgroundMode="none"
-                android:layout_marginTop="@dimen/scale_10dp"
                 android:layout_below="@id/name_on_card_til"
+                android:layout_marginTop="@dimen/scale_10dp"
+                android:hint="Card Number"
+                android:textColorHint="@color/lightGrey"
                 app:boxBackgroundColor="@color/sdkThemeColorPrimary"
-                app:hintTextColor="@color/lightGrey"
-                android:textColorHint="@color/lightGrey">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/card_number_et_sdk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:background="@android:color/white"
-                android:textColor="@color/darkGrey"
-                android:padding="@dimen/scale_5dp"/>
+                app:boxBackgroundMode="none"
+                app:hintTextColor="@color/lightGrey">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/card_number_et_sdk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:inputType="number"
+                    android:padding="@dimen/scale_5dp"
+                    android:textColor="@color/darkGrey" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -180,57 +198,59 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/card_number_til"
                 android:layout_marginTop="@dimen/scale_10dp"
-                android:paddingEnd="@dimen/scale_25dp"
-                android:paddingStart="0dp"
                 android:orientation="horizontal"
+                android:paddingStart="0dp"
+                android:paddingEnd="@dimen/scale_25dp"
                 android:weightSum="2">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/month_til"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Exp. Date: MM/YY"
-                android:layout_weight="1"
-                android:layout_margin="@dimen/scale_2dp"
-                app:boxBackgroundMode="none"
-                app:boxBackgroundColor="@color/sdkThemeColorPrimary"
-                app:hintTextColor="@color/lightGrey"
-                android:textColorHint="@color/lightGrey">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/month_et_sdk"
-                    android:layout_width="match_parent"
-                    android:inputType="number"
-                    android:maxLength="5"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/month_til"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:textColor="@color/darkGrey"
-                    android:padding="@dimen/scale_5dp"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_margin="@dimen/scale_2dp"
+                    android:layout_weight="1"
+                    android:hint="Exp. Date: MM/YY"
+                    android:textColorHint="@color/lightGrey"
+                    app:boxBackgroundColor="@color/sdkThemeColorPrimary"
+                    app:boxBackgroundMode="none"
+                    app:hintTextColor="@color/lightGrey">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cvv_til"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/scale_10dp"
-                android:layout_marginTop="@dimen/scale_2dp"
-                android:layout_marginEnd="@dimen/scale_2dp"
-                android:layout_marginBottom="@dimen/scale_2dp"
-                android:hint="CVV"
-                android:layout_weight="1"
-                app:boxBackgroundMode="none"
-                app:boxBackgroundColor="@color/sdkThemeColorPrimary"
-                app:hintTextColor="@color/lightGrey"
-                android:textColorHint="@color/lightGrey">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cvv_et_sdk"
-                    android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/month_et_sdk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:inputType="date"
+                        android:maxLength="5"
+                        android:padding="@dimen/scale_5dp"
+                        android:textColor="@color/darkGrey" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/cvv_til"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:textColor="@color/darkGrey"
-                    android:maxLength="3"
-                    android:inputType="number"
-                    android:padding="@dimen/scale_5dp"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginStart="@dimen/scale_10dp"
+                    android:layout_marginTop="@dimen/scale_2dp"
+                    android:layout_marginEnd="@dimen/scale_2dp"
+                    android:layout_marginBottom="@dimen/scale_2dp"
+                    android:layout_weight="1"
+                    android:hint="CVV"
+                    android:textColorHint="@color/lightGrey"
+                    app:boxBackgroundColor="@color/sdkThemeColorPrimary"
+                    app:boxBackgroundMode="none"
+                    app:hintTextColor="@color/lightGrey">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cvv_et_sdk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:padding="@dimen/scale_5dp"
+                        android:textColor="@color/darkGrey" />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <CheckBox
@@ -239,11 +259,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/month_cvv_et_layout"
                 android:layout_marginTop="@dimen/scale_10dp"
-                android:text="Save this card"
                 android:buttonTint="@color/lightGrey"
+                android:text="Save this card"
                 android:textColor="@color/grey"
-                android:textSize="@dimen/scale_12sp"
-                />
+                android:textSize="@dimen/scale_12sp" />
         </RelativeLayout>
 
     </RelativeLayout>
