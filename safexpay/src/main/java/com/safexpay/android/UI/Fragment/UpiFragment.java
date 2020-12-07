@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +47,27 @@ public class UpiFragment extends BaseFragment implements View.OnClickListener {
 
     private void init() {
         binding.navBackUpi.setOnClickListener(this);
+        SessionStore.PG_ID = upiList.get(0).getPgDetailsResponse().getPgId();
+        SessionStore.SCHEME_ID = upiList.get(0).getSchemeDetailsResponse().getSchemeId();
+        SessionStore.PAYMODE_ID = payModeId;
+        binding.upiIdEtSdk.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                SessionStore.Upi_Id = binding.upiIdEtSdk.getText().toString();
+
+            }
+        });
     }
 
     @Override
