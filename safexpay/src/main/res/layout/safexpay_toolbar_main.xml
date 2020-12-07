@@ -96,20 +96,10 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/safe_x_order_amount_text"
                             android:textColor="@color/darkGrey"
-                            android:textSize="@dimen/scale_25sp"
+                            android:textSize="@dimen/scale_22sp"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/safe_x_order_id"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignBottom="@id/safe_x_order_amount"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="@dimen/scale_5dp"
-                            android:layout_marginBottom="@dimen/scale_2dp"
-                            android:gravity="bottom|end"
-                            android:textColor="@color/darkGrey"
-                            android:textSize="@dimen/scale_12sp" />
+
                     </RelativeLayout>
 
 
