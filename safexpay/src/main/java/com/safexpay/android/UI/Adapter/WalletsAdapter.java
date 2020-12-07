@@ -2,6 +2,7 @@ package com.safexpay.android.UI.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.safexpay.android.Interfaces.ItemSelectedCallback;
 import com.safexpay.android.Model.PaymentMode;
 import com.safexpay.android.R;
 import com.safexpay.android.Utils.SessionStore;
@@ -19,14 +21,16 @@ import java.util.List;
 
 public class WalletsAdapter extends RecyclerView.Adapter<WalletsAdapter.WalletsViewHolder> {
 
+    private final ItemSelectedCallback clickCallback;
     private Context context;
     private List<PaymentMode.PaymentModeDetailsList> paymentWalletList;
     private CustomBankItemBinding binding;
     private String payModeId;
 
-    public WalletsAdapter(Context context, List<PaymentMode.PaymentModeDetailsList> paymentWalletList, String payModeId) {
+    public WalletsAdapter(Context context, List<PaymentMode.PaymentModeDetailsList> paymentWalletList, String payModeId, ItemSelectedCallback clickCallback) {
         this.payModeId = payModeId;
         this.context = context;
+        this.clickCallback = clickCallback;
         this.paymentWalletList = paymentWalletList;
     }
 
@@ -44,39 +48,53 @@ public class WalletsAdapter extends RecyclerView.Adapter<WalletsAdapter.WalletsV
         if (item.getSelected())
             binding.selectedIv.setVisibility(View.VISIBLE);
         else binding.selectedIv.setVisibility(View.GONE);
+        binding.bankItemContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCallback.onClick(position);
+                /*selectCard(position);
+                try {
+                    SessionStore.PG_ID = paymentWalletList.get(position).getPgDetailsResponse().getPgId();
+                    SessionStore.SCHEME_ID = paymentWalletList.get(position).getSchemeDetailsResponse().getSchemeId();
+                    SessionStore.PAYMODE_ID = payModeId;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }*/
+            }
+        });
         Glide.with(context).load(item.getPgDetailsResponse().getPgIcon()).into(binding.bankImageSdk);
     }
 
-    public void selectCard(int position) {
+    /*public void selectCard(int position) {
         for (int i = 0; i < paymentWalletList.size(); i++) {
             if (i == position)
-                paymentWalletList.get(position).setSelected(true);
+                paymentWalletList.get(i).setSelected(true);
             else paymentWalletList.get(i).setSelected(false);
         }
         notifyDataSetChanged();
-    }
+    }*/
 
     @Override
     public int getItemCount() {
         return paymentWalletList.size();
     }
 
-    class WalletsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class WalletsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public WalletsViewHolder(@NonNull View itemView) {
             super(itemView);
-            binding.bankItemContainer.setOnClickListener(this);
+//            binding.bankItemContainer.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.bank_item_container){
+            if (v.getId() == R.id.bank_item_container) {
                 int pos = getAdapterPosition();
-                selectCard(pos);
+//                selectCard(pos);
                 try {
-                SessionStore.PG_ID = paymentWalletList.get(pos).getPgDetailsResponse().getPgId();
-                SessionStore.SCHEME_ID = paymentWalletList.get(pos).getSchemeDetailsResponse().getSchemeId();
-                SessionStore.PAYMODE_ID = payModeId;
-                } catch (Exception e){
+                    SessionStore.PG_ID = paymentWalletList.get(pos).getPgDetailsResponse().getPgId();
+                    SessionStore.SCHEME_ID = paymentWalletList.get(pos).getSchemeDetailsResponse().getSchemeId();
+                    SessionStore.PAYMODE_ID = payModeId;
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

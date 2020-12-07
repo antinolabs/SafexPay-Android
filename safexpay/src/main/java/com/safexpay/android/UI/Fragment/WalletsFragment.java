@@ -1,32 +1,25 @@
 package com.safexpay.android.UI.Fragment;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import com.safexpay.android.Interfaces.ItemSelectedCallback;
 import com.safexpay.android.Model.PaymentMode;
-import com.safexpay.android.Model.Wallet;
 import com.safexpay.android.R;
-import com.safexpay.android.UI.Activity.PaymentDetailActivity;
 import com.safexpay.android.UI.Adapter.WalletsAdapter;
 import com.safexpay.android.Utils.SessionStore;
 import com.safexpay.android.databinding.FragmentWalletsBinding;
-
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WalletsFragment extends BaseFragment implements View.OnClickListener {
+public class WalletsFragment extends BaseFragment implements View.OnClickListener, ItemSelectedCallback {
 
-    private PaymentDetailActivity activity;
     private FragmentWalletsBinding binding;
     private String payModeId;
     private List<PaymentMode.PaymentModeDetailsList> paymentWalletList;
@@ -37,7 +30,7 @@ public class WalletsFragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentWalletsBinding.inflate(inflater, container, false);
         init();
@@ -50,7 +43,7 @@ public class WalletsFragment extends BaseFragment implements View.OnClickListene
         for (PaymentMode.PaymentModeDetailsList paymentModeDetailsList : paymentWalletList)
             paymentModeDetailsList.setSelected(false);
         binding.walletListView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        binding.walletListView.setAdapter(new WalletsAdapter(getActivity(), paymentWalletList, payModeId));
+        binding.walletListView.setAdapter(new WalletsAdapter(getActivity(), paymentWalletList, payModeId, this));
     }
 
     @Override
@@ -70,5 +63,26 @@ public class WalletsFragment extends BaseFragment implements View.OnClickListene
                 SessionStore.PAYMODE_ID = "";
             }
         }
+    }
+
+    @Override
+    public void onClick(int position) {
+        selectCard(position);
+        try {
+            SessionStore.PG_ID = paymentWalletList.get(position).getPgDetailsResponse().getPgId();
+            SessionStore.SCHEME_ID = paymentWalletList.get(position).getSchemeDetailsResponse().getSchemeId();
+            SessionStore.PAYMODE_ID = payModeId;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void selectCard(int position) {
+        for (int i = 0; i < paymentWalletList.size(); i++) {
+            if (i == position)
+                paymentWalletList.get(i).setSelected(true);
+            else paymentWalletList.get(i).setSelected(false);
+        }
+        binding.walletListView.setAdapter(new WalletsAdapter(getActivity(), paymentWalletList, payModeId, this));
     }
 }

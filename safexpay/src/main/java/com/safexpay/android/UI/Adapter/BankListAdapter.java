@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.safexpay.android.Interfaces.ItemSelectedCallback;
 import com.safexpay.android.Model.PaymentMode;
 import com.safexpay.android.R;
 import com.safexpay.android.Utils.SessionStore;
@@ -19,15 +20,17 @@ import java.util.List;
 
 public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BankListViewHolder> {
 
+    private final ItemSelectedCallback selectedCallback;
     private Context context;
     private List<PaymentMode.PaymentModeDetailsList> paymentBankList;
     private CustomBankItemBinding binding;
     private String payModeId;
 
-    public BankListAdapter(Context context, List<PaymentMode.PaymentModeDetailsList> paymentBankList, String payModeId) {
+    public BankListAdapter(Context context, List<PaymentMode.PaymentModeDetailsList> paymentBankList, String payModeId, ItemSelectedCallback selectedCallback) {
         this.context = context;
         this.payModeId = payModeId;
         this.paymentBankList = paymentBankList;
+        this.selectedCallback = selectedCallback;
     }
 
     class BankListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -40,26 +43,9 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BankLi
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.bank_item_container) {
-                int pos = getAdapterPosition();
-                selectCard(pos);
-                try {
-                    SessionStore.PG_ID = paymentBankList.get(pos).getPgDetailsResponse().getPgId();
-                    SessionStore.SCHEME_ID = paymentBankList.get(pos).getSchemeDetailsResponse().getSchemeId();
-                    SessionStore.PAYMODE_ID = payModeId;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                selectedCallback.onClick(getAdapterPosition());
             }
         }
-    }
-
-    public void selectCard(int position) {
-        for (int i = 0; i < paymentBankList.size(); i++) {
-            if (i == position)
-                paymentBankList.get(position).setSelected(true);
-            else paymentBankList.get(i).setSelected(false);
-        }
-        notifyDataSetChanged();
     }
 
     @NonNull
