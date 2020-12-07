@@ -88,7 +88,7 @@
             android:layout_marginBottom="@dimen/scale_10dp"/>
 
         <RelativeLayout
-            android:id="@+id/card_layout"
+            android:id="@+id/credit_card_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -99,7 +99,45 @@
             android:backgroundTint="@android:color/white">
 
             <ImageView
-                android:id="@+id/card_iv_sdk"
+                android:id="@+id/credit_card_iv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_card"
+                android:background="@color/sdkThemeColorLight"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/scale_10dp" />
+            <TextView
+                android:id="@+id/Credit_card_tv_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/credit_card_iv_sdk"
+                android:text="CREDITCARD"
+                android:layout_centerVertical="true"
+                android:textColor="@color/darkGrey"
+                android:textSize="@dimen/scale_16sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/sdkThemeColorLight"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/debit_card_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/scale_10dp"
+            android:layout_marginTop="@dimen/scale_5dp"
+            android:background="@drawable/view_outline"
+            android:backgroundTint="@android:color/white">
+
+            <ImageView
+                android:id="@+id/debit_card_iv_sdk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_card"
@@ -110,8 +148,8 @@
                 android:id="@+id/card_tv_sdk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/card_iv_sdk"
-                android:text="CREDIT/DEBIT/ATM CARD"
+                android:layout_toEndOf="@id/debit_card_iv_sdk"
+                android:text="DEBITCARD"
                 android:layout_centerVertical="true"
                 android:textColor="@color/darkGrey"
                 android:textSize="@dimen/scale_16sp"/>
