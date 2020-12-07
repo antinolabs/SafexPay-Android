@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.gson.JsonObject;
 import com.safexpay.android.Model.BrandingData;
+import com.safexpay.android.Model.PaymentMode;
 import com.safexpay.android.R;
 import com.safexpay.android.SafeXPay;
 import com.safexpay.android.UI.Fragment.BaseFragment;
@@ -29,6 +30,7 @@ import com.safexpay.android.ViewModel.BrandingDetailsViewModel;
 import com.safexpay.android.databinding.ActivityPaymentDetailBinding;
 import com.safexpay.android.databinding.SafexpayToolbarMainBinding;
 
+import java.util.List;
 import java.util.Objects;
 
 public class PaymentDetailActivity extends BaseActivity implements View.OnClickListener, ConfirmationFragment.CancelTransactionListener {
@@ -37,6 +39,8 @@ public class PaymentDetailActivity extends BaseActivity implements View.OnClickL
     private BrandingDetailsViewModel detailsViewModel;
     private SafexpayToolbarMainBinding toolbarMainBinding;
     public static String paymentResult = "";
+    private List<PaymentMode.PaymentModeDetailsList> paymentBankList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,7 @@ public class PaymentDetailActivity extends BaseActivity implements View.OnClickL
         binding.payOutButtonCard.setOnClickListener(this);
         toolbarMainBinding.safeXOrderAmount.setText(String.format("%s%s", getIntent().getStringExtra(Constants.AMOUNT),
                 getIntent().getStringExtra(Constants.CURRENCY)));
-        toolbarMainBinding.safeXOrderId.setText(String.format(getString(R.string.order_no_s), getIntent().getStringExtra(Constants.ORDER_NO)));
+        // toolbarMainBinding.safeXOrderId.setText(String.format(getString(R.string.order_no_s), getIntent().getStringExtra(Constants.ORDER_NO)));
         SessionStore.merchantId = getIntent().getStringExtra(Constants.MERCHANT_ID);
         SessionStore.merchantKey = getIntent().getStringExtra(Constants.MERCHANT_KEY);
         if (SessionStore.merchantId == null || SessionStore.merchantKey == null || SessionStore.merchantId.isEmpty() ||
@@ -106,7 +110,7 @@ public class PaymentDetailActivity extends BaseActivity implements View.OnClickL
                     .load(SessionStore.brandingLogo)
                     .error(getResources().getDrawable(R.drawable.ic_safexpay_favicon_10))
                     .into(toolbarMainBinding.safeXPayLogo);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -156,6 +160,7 @@ public class PaymentDetailActivity extends BaseActivity implements View.OnClickL
     public void loadFragment(BaseFragment fragment, boolean addToBackStack) {
         binding.progressBarSdk.setVisibility(View.GONE);
         binding.payOutButtonCard.setVisibility(View.VISIBLE);
+
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.replace(R.id.container, fragment);
@@ -223,9 +228,37 @@ public class PaymentDetailActivity extends BaseActivity implements View.OnClickL
         if (v.getId() == R.id.sdk_close_iv) {
             showConfirmationDialog();
         } else if (v.getId() == R.id.pay_out_button_card) {
-            preparePayment();
+            if (SessionStore.PAYMODE_ID.equals("DC")) {
+                if (!SessionStore.Card_Holder_Name.trim().isEmpty() && !SessionStore.Card_Number.trim().isEmpty() &&
+                        !SessionStore.Exp_Date.trim().isEmpty() && !SessionStore.Cvv.trim().isEmpty() && SessionStore.Cvv.trim().length() == 3
+                        && SessionStore.Exp_Date.trim().length() == 5) {
+                    if (SessionStore.Exp_Date.trim().matches("(?:0[1-9]|1[0-2])/[0-9]{2}")) {
+                        preparePayment();
+                    } else
+                        Toast.makeText(this, "Please enter valid date", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(this, "Please fill in the required information", Toast.LENGTH_SHORT).show();
+            } else if (SessionStore.PAYMODE_ID.equals("CC")) {
+                if (!SessionStore.Card_Holder_Name.trim().isEmpty() && !SessionStore.Card_Number.trim().isEmpty() &&
+                        !SessionStore.Exp_Date.trim().isEmpty() && !SessionStore.Cvv.trim().isEmpty() && SessionStore.Cvv.trim().length() == 3
+                        && SessionStore.Exp_Date.trim().length() == 5) {
+                    if (SessionStore.Exp_Date.trim().matches("(?:0[1-9]|1[0-2])/[0-9]{2}")) {
+                        preparePayment();
+                    } else
+                        Toast.makeText(this, "Please enter valid date", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(this, "Please fill in the required information", Toast.LENGTH_SHORT).show();
+            } else if (SessionStore.PAYMODE_ID.equals("UP")) {
+                if (!SessionStore.Upi_Id.trim().isEmpty()) {
+                    preparePayment();
+                } else
+                    Toast.makeText(this, "Please fill in the required information", Toast.LENGTH_SHORT).show();
+            } else
+
+                preparePayment();
         }
     }
+
 
     private void preparePayment() {
         // API call to fetch the branding details
