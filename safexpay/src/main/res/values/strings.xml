@@ -43,4 +43,5 @@
     <string name="data_not_accurate">You must pass all the required fields correctly</string>
     <string name="enter_valid_email">Enter a valid email</string>
     <string name="enter_valid_mobile">Enter valid mobile number</string>
+    <string name="cardname">CardName</string>
 </resources>
