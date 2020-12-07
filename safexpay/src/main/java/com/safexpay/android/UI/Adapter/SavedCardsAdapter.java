@@ -9,11 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.safexpay.android.Model.SavedCards;
+import com.safexpay.android.Utils.SessionStore;
 import com.safexpay.android.databinding.CustomCardItemBinding;
 
 import java.util.List;
 
-public class SavedCardsAdapter extends RecyclerView.Adapter<SavedCardsAdapter.SavedCardsViewHolder>{
+public class SavedCardsAdapter extends RecyclerView.Adapter<SavedCardsAdapter.SavedCardsViewHolder> {
     private Context context;
     private List<SavedCards> savedCardsList;
     private CustomCardItemBinding binding;
@@ -35,11 +36,13 @@ public class SavedCardsAdapter extends RecyclerView.Adapter<SavedCardsAdapter.Sa
     @Override
     public void onBindViewHolder(@NonNull SavedCardsViewHolder holder, int position) {
         SavedCards savedCard = savedCardsList.get(position);
-        if (savedCard != null){
-            binding.savedCardTvSdk.setText(savedCard.getNameOnCard());
-            binding.savedCardTvDescSdk.setText(String.format("%s %s** **** %s", savedCard.getFirst6Digits().substring(0, 4),
-                    savedCard.getFirst6Digits().substring(4), savedCard.getLast4Digits()));
-            binding.savedCardExpDateEtSdk.setText(String.format("%s/%s", savedCard.getExpiryMonth(), savedCard.getExpiryYear()));
+        if (savedCard != null) {
+
+//            binding.savedCardTvSdk.setText(savedCard.getNameOnCard());
+//            binding.savedCardTvDescSdk.setText(String.format("%s %s** **** %s", savedCard.getFirst6Digits().substring(0, 4),
+//                    savedCard.getFirst6Digits().substring(4), savedCard.getLast4Digits()));
+//            binding.savedCardExpDateEtSdk.setText(String.format("%s/%s", savedCard.getExpiryMonth(), savedCard.getExpiryYear()));
+
         }
     }
 
