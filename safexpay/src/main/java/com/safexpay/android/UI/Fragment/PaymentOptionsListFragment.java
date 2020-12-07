@@ -42,14 +42,12 @@ public class PaymentOptionsListFragment extends BaseFragment implements View.OnC
     private List<PaymentMode.PaymentModeDetailsList> debitCardList = new ArrayList<>();
     private List<PaymentMode.PaymentModeDetailsList> upiList = new ArrayList<>();
     private List<PaymentMode.PaymentModeDetailsList> walletList = new ArrayList<>();
-    private String netBankingPayModeId = "", creditCardPayModeId = "", debitCardPayModeId = "", upiPayModeId = "",
-    walletPayModeId = "";
+    private String netBankingPayModeId = "", creditCardPayModeId = "", debitCardPayModeId = "", upiPayModeId = "", walletPayModeId = "";
     private SavedCardsAdapter savedCardsAdapter;
 
     public PaymentOptionsListFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,14 +63,13 @@ public class PaymentOptionsListFragment extends BaseFragment implements View.OnC
         payModeViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PayModeViewModel.class);
         payModeViewModel.init();
         observerViewModel();
-        binding.cardLayout.setOnClickListener(this);
+        binding.creditCardLayout.setOnClickListener(this);
+        binding.debitCardLayout.setOnClickListener(this);
         binding.netBankingLayout.setOnClickListener(this);
         binding.emiLayout.setOnClickListener(this);
         binding.walletLayout.setOnClickListener(this);
         binding.upiLayout.setOnClickListener(this);
         getPaymentModeAndCards();
-        savedCardsAdapter = new SavedCardsAdapter(getContext(), savedCardsList, "DC");
-        binding.savedCardsRecycler.setAdapter(savedCardsAdapter);
         binding.savedCardsRecycler.addItemDecoration(new RecyclerUtils.LinePagerIndicatorDecoration());
         new RecyclerUtils.ScrollByOneItem().attachToRecyclerView(binding.savedCardsRecycler);
     }
@@ -86,7 +83,7 @@ public class PaymentOptionsListFragment extends BaseFragment implements View.OnC
                 PaymentOptionsListFragment.this.savedCardsList.addAll(savedCards);
                 binding.savedCardsTvSdk.setVisibility(View.VISIBLE);
                 binding.savedCardsRecycler.setVisibility(View.VISIBLE);
-                savedCardsAdapter.notifyDataSetChanged();
+
             }
         });
 
@@ -102,7 +99,7 @@ public class PaymentOptionsListFragment extends BaseFragment implements View.OnC
         });
     }
 
-    private void clearLists(){
+    private void clearLists() {
         creditCardList.clear();
         debitCardList.clear();
         upiList.clear();
@@ -113,7 +110,8 @@ public class PaymentOptionsListFragment extends BaseFragment implements View.OnC
     private void invalidatePaymentMethods() {
         if (binding != null) {
             binding.netBankingLayout.setVisibility(View.GONE);
-            binding.cardLayout.setVisibility(View.GONE);
+            binding.creditCardLayout.setVisibility(View.GONE);
+            binding.debitCardLayout.setVisibility(View.GONE);
             binding.upiLayout.setVisibility(View.GONE);
             binding.walletLayout.setVisibility(View.GONE);
             binding.payLaterLayout.setVisibility(View.GONE);
@@ -124,11 +122,14 @@ public class PaymentOptionsListFragment extends BaseFragment implements View.OnC
                         binding.netBankingLayout.setVisibility(View.VISIBLE);
                         netBankingPayModeId = paymentMode.getPayModeId();
                         netBankingList.addAll(paymentMode.getPaymentModeDetailsList());
-                    } else if (paymentMode.getPaymentMode().equals(getString(R.string.credit_card)) ||
-                            paymentMode.getPaymentMode().equals(getString(R.string.debit_card))) {
-                        debitCardPayModeId = paymentMode.getPayModeId();
-                        binding.cardLayout.setVisibility(View.VISIBLE);
+                    } else if (paymentMode.getPaymentMode().equals(getString(R.string.credit_card))) {
+                        creditCardPayModeId = paymentMode.getPayModeId();
+                        binding.creditCardLayout.setVisibility(View.VISIBLE);
                         creditCardList.addAll(paymentMode.getPaymentModeDetailsList());
+                    } else if (paymentMode.getPaymentMode().equals(getString(R.string.debit_card))) {
+                        debitCardPayModeId = paymentMode.getPayModeId();
+                        binding.debitCardLayout.setVisibility(View.VISIBLE);
+                        debitCardList.addAll(paymentMode.getPaymentModeDetailsList());
                     } else if (paymentMode.getPaymentMode().equals(getString(R.string.upi))) {
                         upiPayModeId = paymentMode.getPayModeId();
                         binding.upiLayout.setVisibility(View.VISIBLE);
@@ -151,8 +152,8 @@ public class PaymentOptionsListFragment extends BaseFragment implements View.OnC
     private void getPaymentModeAndCards() {
         //for getting saved cards
         JsonObject savedCardsObject = new JsonObject();
-        savedCardsObject.addProperty("me_id", SessionStore.merchantId);
-        payModeViewModel.getSavedCards(savedCardsObject);
+//        savedCardsObject.addProperty("me_id", SessionStore.merchantId);
+//        payModeViewModel.getSavedCards(savedCardsObject);
 
         //for getting payment modes
         JsonObject payModeObject = new JsonObject();
@@ -177,8 +178,11 @@ public class PaymentOptionsListFragment extends BaseFragment implements View.OnC
             activity.loadFragment(new EMIFragment(), true);
         }*/ else if (id == R.id.upi_layout) {
             activity.loadFragment(new UpiFragment(upiList, upiPayModeId), true);
-        } else if (id == R.id.card_layout) {
-            activity.loadFragment(CardFragment.getCardForm(CardFragment.Mode.DebitCard, savedCardsList, debitCardPayModeId), true);
+        } else if (id == R.id.credit_card_layout) {
+           activity.loadFragment(CardFragment.getCardForm(CardFragment.Mode.CreditCard, creditCardList, creditCardPayModeId), true);
+
+        } else if (id == R.id.debit_card_layout) {
+            activity.loadFragment(CardFragment.getCardForm(CardFragment.Mode.DebitCard, debitCardList, debitCardPayModeId), true);
         }
     }
 
